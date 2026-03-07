@@ -1,0 +1,51 @@
+{
+  "timestamp": "2026-03-07T13:51:39.583575",
+  "total_columns": 7,
+  "drifting_columns": 7,
+  "stable_columns": 0,
+  "drift_ratio": 1.0,
+  "columns": {
+    "ieg": {
+      "reference_mean": 7.945695885118066,
+      "current_mean": 5.2067278387593,
+      "drift_score": 1.2725884762380653,
+      "drift_detected": "True"
+    },
+    "ipp": {
+      "reference_mean": 7.555202581154117,
+      "current_mean": 5.436516398170126,
+      "drift_score": 2.256344921172324,
+      "drift_detected": "True"
+    },
+    "iaa": {
+      "reference_mean": 7.918225130890051,
+      "current_mean": 5.043751357761393,
+      "drift_score": 1.0945334392085424,
+      "drift_detected": "True"
+    },
+    "ips": {
+      "reference_mean": 6.287129240993354,
+      "current_mean": 4.787711491286384,
+      "drift_score": 0.8364992605150562,
+      "drift_detected": "True"
+    },
+    "ipv": {
+      "reference_mean": 7.545476040203717,
+      "current_mean": 4.919416684889017,
+      "drift_score": 2.4217886001096627,
+      "drift_detected": "True"
+    },
+    "inde": {
+      "reference_mean": 7.269914756795589,
+      "current_mean": 4.840062332666162,
+      "drift_score": 2.4500246048759537,
+      "drift_detected": "True"
+    },
+    "ida": {
+      "reference_mean": 12.5480805777271,
+      "current_mean": 4.6345746455334424,
+      "drift_score": 2.4102245217367044,
+      "drift_detected": "True"
+    }
+  }
+}
