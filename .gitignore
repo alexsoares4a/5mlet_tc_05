@@ -160,9 +160,13 @@ cython_debug/
 #.idea/
 
 # documentos
-doc/
+docs/
 
 # MLflow
 mlruns/
 
 176856*
+
+# Logs
+logs/
+*.log
