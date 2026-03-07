@@ -21,7 +21,11 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 # Importando o seu preprocessor customizado
 from src.preprocessing import DataPreprocessor
 
-# Configuração de Logging para Monitoramento [cite: 22, 28]
+# Configuração de Logging para Monitoramento
+PROJECT_ROOT = Path(__file__).parent.parent
+LOGS_DIR = PROJECT_ROOT / "logs"
+LOGS_DIR.mkdir(parents=True, exist_ok=True)
+
 MODEL_DIR = Path("models")
 MODEL_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -29,7 +33,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler(MODEL_DIR / "train.log"),
+        logging.FileHandler(LOGS_DIR / "train.log", encoding='utf-8'),
         logging.StreamHandler()
     ]
 )
@@ -63,8 +67,8 @@ class TrainModel:
             X_processed, y = self.preprocessor.fit_transform(df_raw)
 
             # Remover RA se existir
-            if 'RA' in X_processed.columns:
-                X_processed = X_processed.drop(columns=['RA'])
+            if 'ra' in X_processed.columns:
+                X_processed = X_processed.drop(columns=['ra'])
 
             # 3. Split
             X_train, X_test, y_train, y_test = train_test_split(
@@ -87,10 +91,11 @@ class TrainModel:
             # 5. Avaliação
             y_pred = self.model.predict(X_test)
             
+            # ✅ CORREÇÃO DO BUG AQUI
             self.metrics = {
                 'MAE': float(mean_absolute_error(y_test, y_pred)),
                 'RMSE': float(np.sqrt(mean_squared_error(y_test, y_pred))),
-                'R2': float(r2_score(y_test, y_test)),
+                'R2': float(r2_score(y_test, y_pred)),  # ✅ CORRETO: y_test vs y_pred
                 'CV_RMSE': None  # Será calculado abaixo
             }
 
@@ -118,7 +123,7 @@ class TrainModel:
             'model': self.model,
             'preprocessor': self.preprocessor,
             'features': self.preprocessor.feature_columns,
-            'metrics': self.metrics  # Adicionado para referência
+            'metrics': self.metrics
         }
         
         joblib.dump(artifact, model_path)
